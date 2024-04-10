@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, IPlayerModel
         dir *= speed;
         dir.y = _rb.velocity.y;
         _rb.velocity = dir;
+        transform.Translate(dir, Space.Self);
     }
     public void LookDir(Vector3 dir)
     {

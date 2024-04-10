@@ -10,13 +10,16 @@ public class FakeCrash : Player
     public float attackCooldown;
     Coroutine _cooldown;
     public Action onSpin = delegate { };
+    public float fuerzaEmpuje = 1000f;
+    public GameObject personaje;
+
     public void Dead()
     {
         Destroy(gameObject);
     }
     public void Spin()
     {
-        //Attack
+        Attack();
         _cooldown = StartCoroutine(Cooldown());
         onSpin();
     }
@@ -24,6 +27,17 @@ public class FakeCrash : Player
     {
         yield return new WaitForSeconds(attackCooldown);
         _cooldown = null;
+    }
+
+    void Attack()
+    {
+        
+        Vector3 direccionOpuesta = transform.position - personaje.transform.position;
+        direccionOpuesta.Normalize(); // Normalizar para obtener una dirección unitaria
+
+        // Aplicar fuerza al personaje en la dirección opuesta
+        Rigidbody personajeRigidbody = personaje.GetComponent<Rigidbody>();
+        personajeRigidbody.AddForce(direccionOpuesta * fuerzaEmpuje);
     }
     public bool IsCooldown => _cooldown != null;
     public int Life => _life;

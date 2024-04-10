@@ -443,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467448060}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.36, y: 2, z: -3.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -451,7 +451,7 @@ Transform:
   - {fileID: 1325147692}
   - {fileID: 1250097419}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &467448065
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2206,6 +2206,8 @@ MonoBehaviour:
   speed: 5
   _life: 100
   attackCooldown: 4
+  fuerzaEmpuje: 1000
+  personaje: {fileID: 467448060}
 --- !u!114 &1378854878
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class FakeCrash : Player
 
     void Attack()
     {
-        
+
         Vector3 direccionOpuesta = transform.position - personaje.transform.position;
         direccionOpuesta.Normalize(); // Normalizar para obtener una dirección unitaria
 

@@ -12,9 +12,11 @@ public class Player : MonoBehaviour, IPlayerModel
     //Controller
 
     Rigidbody _rb;
+    public Animator anim;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
     public void Move(Vector3 dir)
     {
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour, IPlayerModel
         dir.y = _rb.velocity.y;
         _rb.velocity = dir;
         transform.Translate(dir, Space.Self);
+        
     }
     public void LookDir(Vector3 dir)
     {

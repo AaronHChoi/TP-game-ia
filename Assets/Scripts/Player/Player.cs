@@ -1,5 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 //Model
 public class Player : MonoBehaviour, IPlayerModel
@@ -12,11 +13,13 @@ public class Player : MonoBehaviour, IPlayerModel
     //Controller
 
     Rigidbody _rb;
-    public Animator anim;
+    [SerializeField] Animator _anim;
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+      
+        
     }
     public void Move(Vector3 dir)
     {
@@ -24,6 +27,14 @@ public class Player : MonoBehaviour, IPlayerModel
         dir.y = _rb.velocity.y;
         _rb.velocity = dir;
         transform.Translate(dir, Space.Self);
+        if (_rb.velocity.x != 0 || _rb.velocity.z != 0)
+        {
+            _anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            _anim.SetBool("isWalking", false);
+        }
         
     }
     public void LookDir(Vector3 dir)

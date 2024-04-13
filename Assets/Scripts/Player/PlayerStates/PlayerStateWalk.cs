@@ -22,6 +22,7 @@ public class PlayerStateWalk<T> : State<T>
         float z = Input.GetAxis("Vertical");
         Vector3 dir = new Vector3(x, 0, z).normalized * Time.deltaTime;
         _player.Move(dir);
+     
         //_player.LookDir(dir);
 
         if (x == 0 && z == 0)

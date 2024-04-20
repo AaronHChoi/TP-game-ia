@@ -31,13 +31,16 @@ public class FakeCrash : Player
 
     void Attack()
     {
+        Debug.Log("atack");
 
-        Vector3 direccionOpuesta = transform.position - personaje.transform.position;
-        direccionOpuesta.Normalize(); // Normalizar para obtener una dirección unitaria
+        //Vector3 direccionOpuesta = personaje.transform.position - transform.position;
+        //direccionOpuesta.Normalize(); // Normalizar para obtener una dirección unitaria
 
-        // Aplicar fuerza al personaje en la dirección opuesta
-        Rigidbody personajeRigidbody = personaje.GetComponent<Rigidbody>();
-        personajeRigidbody.AddForce(direccionOpuesta * fuerzaEmpuje);
+        //// Aplicar fuerza al personaje en la dirección opuesta
+        //Rigidbody personajeRigidbody = personaje.GetComponent<Rigidbody>();
+        //personajeRigidbody.AddForce(direccionOpuesta * fuerzaEmpuje);
+
+        personaje.transform.position += transform.forward * Time.deltaTime * fuerzaEmpuje;
     }
     public bool IsCooldown => _cooldown != null;
     public int Life => _life;

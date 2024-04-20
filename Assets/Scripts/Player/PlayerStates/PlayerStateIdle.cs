@@ -13,7 +13,7 @@ public class PlayerStateIdle<T> : State<T>
     public override void Execute()
     {
         base.Execute();
-        Debug.Log("Idle");
+        //Debug.Log("Idle");
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 

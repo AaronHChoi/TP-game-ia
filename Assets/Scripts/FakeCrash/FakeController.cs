@@ -17,10 +17,10 @@ public class FakeController : MonoBehaviour
     }
     private void Start()
     {
-        InitializeFSM();
+        InitializeFSMFakeCrash();
         InitializedTree();
     }
-    void InitializeFSM()
+    void InitializeFSMFakeCrash()
     {
         var idle = new FakeIdleState<StatesEnum>();
         var dead = new FakeDeadState<StatesEnum>(_model);
@@ -76,6 +76,9 @@ public class FakeController : MonoBehaviour
     {
         _fsm.OnUpdate();
         _root.Execute();
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
+   
 
 }

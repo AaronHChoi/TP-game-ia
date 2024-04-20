@@ -17,7 +17,7 @@ public class PlayerStateWalk<T> : State<T>
     public override void Execute()
     {
         base.Execute();
-        Debug.Log("Walk");
+        //Debug.Log("Walk");
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 dir = new Vector3(x, 0, z).normalized * Time.deltaTime;

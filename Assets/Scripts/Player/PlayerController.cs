@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
         _view = GetComponent<IPlayerView>();
         InitializeFSM();
     }
-
     void InitializeFSM()
     {
         _fsm = new FSM<StatesEnum>();

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FakeChaseState<T> : State<T>
+public class EnemyChaseState<T> : State<T>
 {
-    FakeCrash _model;
+    Enemy _model;
     Transform _target;
 
-    public FakeChaseState(FakeCrash model, Transform target)
+    public EnemyChaseState(Enemy model, Transform target)
     {
         _model = model;
         _target = target;

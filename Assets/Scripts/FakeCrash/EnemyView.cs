@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FakeCrashView : PlayerView
+public class EnemyView : PlayerView
 {
-    FakeCrash _model;
+    Enemy _model;
     protected override void Awake()
     {
         base.Awake();
-        _model = GetComponent<FakeCrash>();
+        _model = GetComponent<Enemy>();
         _model.onSpin += OnSpin;
     }
     void OnSpin()

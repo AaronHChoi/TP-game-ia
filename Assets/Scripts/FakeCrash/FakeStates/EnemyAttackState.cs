@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FakeAttackState<T> : State<T>
+public class EnemyAttackState<T> : State<T>
 {
-    FakeCrash _model;
-    public FakeAttackState(FakeCrash model)
+    Enemy _model;
+    public EnemyAttackState(Enemy model)
     {
         _model = model;
     }

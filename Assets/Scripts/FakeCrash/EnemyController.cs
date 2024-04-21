@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FakeController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public Transform target;
     public float attackRange;
     LineOfSight _los;
     FSM<StatesEnum> _fsm;
-    FakeCrash _model;
+    Enemy _model;
     ITreeNode _root;
     private void Awake()
     {
-        _model = GetComponent<FakeCrash>();
+        _model = GetComponent<Enemy>();
         _los = GetComponent<LineOfSight>();
     }
     private void Start()
@@ -22,10 +22,10 @@ public class FakeController : MonoBehaviour
     }
     void InitializeFSMFakeCrash()
     {
-        var idle = new FakeIdleState<StatesEnum>();
-        var dead = new FakeDeadState<StatesEnum>(_model);
-        var attack = new FakeAttackState<StatesEnum>(_model);
-        var chase = new FakeChaseState<StatesEnum>(_model, target);
+        var idle = new EnemyIdleState<StatesEnum>();
+        var dead = new EnemyDeadState<StatesEnum>(_model);
+        var attack = new EnemyAttackState<StatesEnum>(_model);
+        var chase = new EnemyChaseState<StatesEnum>(_model, target);
 
         idle.AddTransition(StatesEnum.Dead, dead);
         idle.AddTransition(StatesEnum.Attack, attack);

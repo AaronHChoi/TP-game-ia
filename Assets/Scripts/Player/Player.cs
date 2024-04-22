@@ -6,7 +6,6 @@ public class Player : MonoBehaviour, IPlayerModel
 {
     public float speed;
     Rigidbody _rb;
-    [SerializeField] Animator _anim;
     
     private void Awake()
     {
@@ -18,15 +17,6 @@ public class Player : MonoBehaviour, IPlayerModel
         dir.y = _rb.velocity.y;
         _rb.velocity = dir;
         //transform.Translate(dir, Space.Self);
-        //if (_rb.velocity.x != 0 || _rb.velocity.z != 0)
-        //{
-        //    _anim.SetBool("isWalking", true);
-        //}
-        //else
-        //{
-        //    _anim.SetBool("isWalking", false);
-        //}
-        
     }
     public void LookDir(Vector3 dir)
     {

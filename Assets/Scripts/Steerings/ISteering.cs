@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CameraStateEnum 
+public interface ISteering 
 {
-    Default,
-    Normal,
-    Alert
+    Vector3 GetDir();
 }

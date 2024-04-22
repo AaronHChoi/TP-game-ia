@@ -16,8 +16,6 @@ public class CamaraTest : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
- 
-
     public void Cam()
     {
         mouseX += rotSpeed * Input.GetAxis("Mouse X");
@@ -26,7 +24,6 @@ public class CamaraTest : MonoBehaviour
         target.rotation = Quaternion.Euler(mouseY, mouseX, 0.0f);
         player.rotation = Quaternion.Euler(0.0f, mouseX, 0.0f);
     }
-
     private void LateUpdate()
     {
         Cam();
@@ -34,5 +31,4 @@ public class CamaraTest : MonoBehaviour
         transform.position = posTP.position;
         transform.LookAt(player);
     }
-
 }

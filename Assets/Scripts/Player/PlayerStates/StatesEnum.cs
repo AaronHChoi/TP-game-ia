@@ -8,6 +8,6 @@ public enum StatesEnum
     Idle,
     Walk,
     Attack,
-    Chase,
-    Dead
+    Seek,
+    Patrol
 }

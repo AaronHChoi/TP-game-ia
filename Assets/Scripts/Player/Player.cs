@@ -1,17 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
-//Model
 public class Player : MonoBehaviour, IPlayerModel
 {
     public float speed;
-    //MVC
-
-    //Model
-    //View
-    //Controller
-
     Rigidbody _rb;
+    
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -21,6 +16,7 @@ public class Player : MonoBehaviour, IPlayerModel
         dir *= speed;
         dir.y = _rb.velocity.y;
         _rb.velocity = dir;
+        //transform.Translate(dir, Space.Self);
     }
     public void LookDir(Vector3 dir)
     {

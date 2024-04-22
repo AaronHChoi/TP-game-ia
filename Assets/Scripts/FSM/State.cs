@@ -16,12 +16,11 @@ public class State<T> : IState<T>
     }
     public virtual void Enter()
     {
-
     }
     public virtual void Execute()
     {
     }
-    public void LateExecute()
+    public virtual void LateExecute()
     {
     }
     public virtual void Sleep()

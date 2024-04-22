@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Ghost/GhostModel.cs.meta
 guid: e3b735eeb9c8e8d4482e5c1dd919b4ba
-========
-guid: 536a15fa47de87549aa5d84f16540bbc
->>>>>>>> Test:Assets/Scripts/Ghost/GhostStates/EnemyAttackState.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

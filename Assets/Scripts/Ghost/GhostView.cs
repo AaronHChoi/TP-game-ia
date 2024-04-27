@@ -7,6 +7,7 @@ public class GhostView : MonoBehaviour
     public GameObject alertUI;
     Ghost _model;
     IAlert _alert;
+    
     private void Awake()
     {
         _alert = GetComponent<IAlert>();
@@ -23,5 +24,6 @@ public class GhostView : MonoBehaviour
     void OnAttack()
     {
         Debug.Log("Attack");
+        
     }
 }

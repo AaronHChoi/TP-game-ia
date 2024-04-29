@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject lostText;
     [SerializeField] GameObject menuPanelPanel;
     [SerializeField] GameObject menuPanel;
+    bool lost;
     bool isPaused;
     private void Start()
     {
         isPaused = false;
+        bool lost = false;
         Time.timeScale = 1f;
     }
     private void Update()
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
         menuPanelPanel.SetActive(true);
         lostText.SetActive(true);
         TogglePause();
+        lost = true;
     }
     void TogglePause()
     {
@@ -50,8 +53,9 @@ public class GameManager : MonoBehaviour
             menuPanel.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            
         }
-        else
+        else if (isPaused && lost == false)
         {
             Time.timeScale = 1f;
             menuPanel.SetActive(false);

@@ -7,7 +7,7 @@ public class GhostView : MonoBehaviour
     Ghost _model;
     Rigidbody _rb;
     [SerializeField]GameManager _gameManager;
-    //public Animator anim;
+    public Animator anim;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class GhostView : MonoBehaviour
     }
     private void Update()
     {
-        //anim.SetFloat("Vel", _rb.velocity.magnitude);
+        anim.SetFloat("Vel", _rb.velocity.magnitude);
     }
     void OnAttack()
     {

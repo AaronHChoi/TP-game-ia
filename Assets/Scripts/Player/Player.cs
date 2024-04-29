@@ -5,16 +5,17 @@ public class Player : MonoBehaviour, IPlayerModel
 {
     public float speed;
     public float turnSmoothTime = 0.1f;
+    public float dashSpeed = 20f;
+    public float dashDuration = 5f;
     private float turnSmoothVelocity;
     private Rigidbody rb;
     protected Transform cam;
-
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
     }
-
     public virtual void Move(Vector3 dir)
     {
         if (dir.magnitude >= 0.1f)
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour, IPlayerModel
         }
         else
         {
-            rb.velocity = Vector3.zero; // Si la dirección es menor que 0.1f, detener el movimiento.
+            rb.velocity = Vector3.zero;
         }
     }
 

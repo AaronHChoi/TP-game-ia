@@ -50,7 +50,7 @@ public class GhostController : MonoBehaviour
         var seek = new GhostStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
 
         idle.AddTransition(StatesEnum.Attack, attack);
-        idle.AddTransition(StatesEnum.Idle, patrol);
+        idle.AddTransition(StatesEnum.Patrol, patrol);
         idle.AddTransition(StatesEnum.Seek, seek);
 
         attack.AddTransition(StatesEnum.Idle, idle);
@@ -74,12 +74,10 @@ public class GhostController : MonoBehaviour
         var seek = new ActionNode(() => _fsm.Transition(StatesEnum.Seek));
         var patrol = new ActionNode(() => _fsm.Transition(StatesEnum.Patrol));
 
-        //var dic = new Dictionary<ITreeNode, float>();
-
         var qIsCooldown = new QuestionNode(() => _model.IsCooldown, idle, attack);
         var qIsCooldownOutOfRange = new QuestionNode(() => _model.IsCooldown, idle, seek);
         var qAttackRange = new QuestionNode(QuestionAttackRange, qIsCooldown, qIsCooldownOutOfRange);
-        var qLos = new QuestionNode(QuestionLoS, qAttackRange, idle);
+        var qLos = new QuestionNode(QuestionLoS, qAttackRange, patrol);
         var qHasLife = new QuestionNode(() => _model.Life > 0, qLos, idle);
 
         _root = qLos;

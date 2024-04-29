@@ -7,7 +7,7 @@ public class PlayerStateWalk<T> : State<T>
 {
     IPlayerModel _player;
     T _idleInput;
-    public PlayerStateWalk(IPlayerModel player, /*IPlayerView view,*/ T idleInput)
+    public PlayerStateWalk(IPlayerModel player, T idleInput)
     {
         _player = player;
         _idleInput = idleInput;

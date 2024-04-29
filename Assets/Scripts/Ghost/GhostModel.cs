@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostModel : MonoBehaviour, IAlert
+public class GhostModel : MonoBehaviour
 {
     bool _alert;
     public bool Alert

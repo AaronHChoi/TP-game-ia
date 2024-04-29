@@ -10,7 +10,7 @@ public class Ghost : Player
     public float attackCooldown;
     public Action onAttack = delegate { };
     Coroutine _cooldown;
-    [SerializeField] Ghost _model;
+    //[SerializeField] Ghost _model;
     public void Attack()
     {
         _cooldown = StartCoroutine(Cooldown());

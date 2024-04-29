@@ -45,33 +45,23 @@ public class GhostController : MonoBehaviour
 
         var idle = new GhostStateIdle<StatesEnum>();
         var attack = new GhostStateAttack<StatesEnum>(_model);
-        var walk = new GhostStateWalk<StatesEnum>();
         var patrol = new GhostStateSteering<StatesEnum>(_model, _patrol, _obstacleAvoidance);
         var seek = new GhostStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
 
         idle.AddTransition(StatesEnum.Attack, attack);
-        idle.AddTransition(StatesEnum.Walk, walk);
         idle.AddTransition(StatesEnum.Idle, patrol);
         idle.AddTransition(StatesEnum.Seek, seek);
 
         attack.AddTransition(StatesEnum.Idle, idle);
-        attack.AddTransition(StatesEnum.Walk, walk);
         attack.AddTransition(StatesEnum.Patrol, patrol);
         attack.AddTransition(StatesEnum.Attack, attack);
 
-        walk.AddTransition(StatesEnum.Attack, attack);
-        walk.AddTransition(StatesEnum.Idle, idle);
-        walk.AddTransition(StatesEnum.Patrol, patrol);
-        walk.AddTransition(StatesEnum.Walk, walk);
-
         patrol.AddTransition(StatesEnum.Attack, attack);
         patrol.AddTransition(StatesEnum.Idle, idle);
-        patrol.AddTransition(StatesEnum.Walk, walk);
         patrol.AddTransition(StatesEnum.Seek, seek);
 
         seek.AddTransition(StatesEnum.Attack, attack);
         seek.AddTransition(StatesEnum.Idle, idle);
-        seek.AddTransition(StatesEnum.Walk, walk);
         seek.AddTransition(StatesEnum.Patrol, patrol);
 
         _fsm.SetInit(patrol);
@@ -80,8 +70,11 @@ public class GhostController : MonoBehaviour
     {
         var idle = new ActionNode(() => _fsm.Transition(StatesEnum.Idle));
         var attack = new ActionNode(() => _fsm.Transition(StatesEnum.Attack));
-        var walk = new ActionNode(() => _fsm.Transition(StatesEnum.Walk));
         var seek = new ActionNode(() => _fsm.Transition(StatesEnum.Seek));
+
+        var dic = new Dictionary<ITreeNode, float>();
+        //dic[dead] = 5;
+
 
         var qIsCooldown = new QuestionNode(() => _model.IsCooldown, idle, attack);
         var qAttackRange = new QuestionNode(QuestionAttackRange, qIsCooldown, seek);

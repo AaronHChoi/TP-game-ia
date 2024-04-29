@@ -25,7 +25,7 @@ public class RandomSpawner : MonoBehaviour
             GameObject selectedSpawnPoint = MyRandoms.Roulette(spawnWeights);
 
             Vector3 spawnPosition = selectedSpawnPoint.transform.position;
-            player.transform.position = new Vector3(spawnPosition.x, 24, spawnPosition.z);
+            player.transform.position = new Vector3(spawnPosition.x, 168.2f, spawnPosition.z);
         }
     }
 }

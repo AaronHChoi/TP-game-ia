@@ -13,16 +13,14 @@ public class GhostController : MonoBehaviour
     Ghost _model;
     FSM<StatesEnum> _fsm;
     LineOfSight _los;
-    IAlert _alert;
     ITreeNode _root;
     ObstacleAvoidance _obstacleAvoidance;
-
+    [SerializeField] Animator _anim;
     ISteering _seek;
     ISteering _patrol;
     private void Awake()
     {
         _los = GetComponent<LineOfSight>();
-        _alert = GetComponent<IAlert>();
         _model = GetComponent<Ghost>();
     }
     private void Start()
@@ -71,14 +69,15 @@ public class GhostController : MonoBehaviour
         var idle = new ActionNode(() => _fsm.Transition(StatesEnum.Idle));
         var attack = new ActionNode(() => _fsm.Transition(StatesEnum.Attack));
         var seek = new ActionNode(() => _fsm.Transition(StatesEnum.Seek));
+        var patrol = new ActionNode(() => _fsm.Transition(StatesEnum.Patrol));
 
-        var dic = new Dictionary<ITreeNode, float>();
-        //dic[dead] = 5;
-
+        //var dic = new Dictionary<ITreeNode, float>();
 
         var qIsCooldown = new QuestionNode(() => _model.IsCooldown, idle, attack);
-        var qAttackRange = new QuestionNode(QuestionAttackRange, qIsCooldown, seek);
-        var qLos = new QuestionNode(QuestionLoS, qAttackRange, idle);
+        var qIsCooldownOutOfRange = new QuestionNode(() => _model.IsCooldown, idle, seek);
+        var qAttackRange = new QuestionNode(QuestionAttackRange, qIsCooldown, qIsCooldownOutOfRange);
+        var qLos = new QuestionNode(QuestionLoS, qAttackRange, patrol);
+        var qHasLife = new QuestionNode(() => _model.Life > 0, qLos, idle);
 
         _root = qLos;
     }

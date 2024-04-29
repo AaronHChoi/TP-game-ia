@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class GhostView : MonoBehaviour
 {
-    public GameObject alertUI;
     Ghost _model;
-    IAlert _alert;
-    
-    private void Awake()
-    {
-        _alert = GetComponent<IAlert>();
-    }
+    Rigidbody _rb;
+    //public Animator anim;
+
     private void Start()
     {
         _model = GetComponent<Ghost>();
+        _rb = GetComponent<Rigidbody>();
         _model.onAttack += OnAttack;
     }
     private void Update()
     {
-        alertUI.SetActive(_alert.Alert);
+        //anim.SetFloat("Vel", _rb.velocity.magnitude);
     }
     void OnAttack()
     {
         Debug.Log("Attack");
-        
     }
 }

@@ -11,6 +11,11 @@ public class Ghost : Player
     public Action onAttack = delegate { };
     Coroutine _cooldown;
     //[SerializeField] Ghost _model;
+    private Rigidbody _rb;
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
     public void Attack()
     {
         _cooldown = StartCoroutine(Cooldown());
@@ -24,6 +29,17 @@ public class Ghost : Player
 
         //Rigidbody personajeRigidbody = _model.GetComponent<Rigidbody>();
         //personajeRigidbody.AddForce(direccionOpuesta * fuerzaEmpuje);
+    }
+    public override void Move(Vector3 dir)
+    {
+        dir *= speed;
+        dir.y = _rb.velocity.y;
+        _rb.velocity = dir;
+    }
+    public override void LookDir(Vector3 dir)
+    {
+        if (dir.x == 0 && dir.z == 0) return;
+        transform.forward = dir;
     }
     IEnumerator Cooldown()
     {

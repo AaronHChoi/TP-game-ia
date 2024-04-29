@@ -7,14 +7,16 @@ public class ObstacleAvoidance
 {
     float _angle;
     float _radius;
+    float _personalArea;
     Transform _entity;
     LayerMask _maskObs;
-    public ObstacleAvoidance(Transform entity, float angle, float radius, LayerMask maskObs)
+    public ObstacleAvoidance(Transform entity, float angle, float radius, LayerMask maskObs, float personalArea = 1)
     {
         _angle = angle;
         _radius = radius;
         _entity = entity;
         _maskObs = maskObs;
+        _personalArea = personalArea;
     }
     public Vector3 GetDir(Vector3 currentDir)
     {
@@ -50,8 +52,20 @@ public class ObstacleAvoidance
         }
         else
         {
-            Vector3 newDir = (currentDir + (_entity.position - closetPoint).normalized).normalized;
-            return Vector3.Lerp(currentDir, newDir, (_radius - nearCollDistance) / _radius);
+            Vector3 relativePos = _entity.InverseTransformPoint(closetPoint);
+            Vector3 dirToClosetPoint = (closetPoint - _entity.position).normalized;
+            Vector3 newDir;
+
+            if (relativePos.x < 0)
+            {
+                newDir = Vector3.Cross(_entity.up, dirToClosetPoint);
+            }
+            else
+            {
+                newDir = -Vector3.Cross(_entity.up, dirToClosetPoint);
+            }
+
+            return Vector3.Lerp(currentDir, newDir, (_radius - Mathf.Clamp(nearCollDistance - _personalArea, 0f, _radius)) / _radius);
         }
     }
 }

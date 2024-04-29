@@ -10,6 +10,8 @@ public class GhostController : MonoBehaviour
     public float angle;
     public float radius;
     public LayerMask maskObs;
+    [SerializeField]float chaseTime;
+    bool seen;
     Ghost _model;
     FSM<StatesEnum> _fsm;
     LineOfSight _los;
@@ -18,6 +20,7 @@ public class GhostController : MonoBehaviour
     [SerializeField] Animator _anim;
     ISteering _seek;
     ISteering _patrol;
+    Coroutine _coroutine;
     private void Awake()
     {
         _los = GetComponent<LineOfSight>();
@@ -76,7 +79,7 @@ public class GhostController : MonoBehaviour
         var qIsCooldown = new QuestionNode(() => _model.IsCooldown, idle, attack);
         var qIsCooldownOutOfRange = new QuestionNode(() => _model.IsCooldown, idle, seek);
         var qAttackRange = new QuestionNode(QuestionAttackRange, qIsCooldown, qIsCooldownOutOfRange);
-        var qLos = new QuestionNode(QuestionLoS, qAttackRange, patrol);
+        var qLos = new QuestionNode(QuestionLoS, qAttackRange, idle);
         var qHasLife = new QuestionNode(() => _model.Life > 0, qLos, idle);
 
         _root = qLos;
@@ -87,7 +90,26 @@ public class GhostController : MonoBehaviour
     }
     bool QuestionLoS()
     {
-        return _los.CheckRange(target) && _los.CheckAngle(target) && _los.CheckView(target);
+        var currLoS = _los.CheckRange(target) && _los.CheckAngle(target) && _los.CheckView(target);
+        if(currLoS == false && seen == true)
+        {
+            if(_coroutine == null)
+            {
+                _coroutine = StartCoroutine(ChaseTime());
+            }
+        }
+        if(_coroutine != null)
+        {
+            StopCoroutine(ChaseTime());
+            _coroutine = null;
+        }
+        seen = currLoS;
+        return seen;
+    }
+    IEnumerator ChaseTime()
+    {
+        yield return new WaitForSeconds(chaseTime);
+        seen = false;   
     }
     private void Update()
     {

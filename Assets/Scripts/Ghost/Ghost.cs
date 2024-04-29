@@ -11,7 +11,7 @@ public class Ghost : Player
     public Action onAttack = delegate { };
     Coroutine _cooldown;
     //[SerializeField] Ghost _model;
-    private Rigidbody _rb;
+    Rigidbody _rb;
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();

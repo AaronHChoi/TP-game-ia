@@ -20,10 +20,6 @@ public class Node : MonoBehaviour
     }
     private void Update()
     {
-        if (hasTrap)
-            mat.color = Color.red;
-        else
-            mat.color = Color.white;
     }
     void GetNeightbourd(Vector3 dir)
     {

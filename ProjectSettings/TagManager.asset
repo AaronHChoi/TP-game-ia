@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - 1
   - player
+  - Enemy
+  - Grow
   layers:
   - Default
   - TransparentFX

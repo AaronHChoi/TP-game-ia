@@ -12,6 +12,7 @@ public class Patrol : ISteering
     {
         _entity = entity;
         _waypoints = waypoints;
+        MyRandoms.Shuffle(_waypoints);
     }
     public Vector3 GetDir()
     {

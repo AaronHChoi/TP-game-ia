@@ -2,36 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class MainMenu : MonoBehaviour
 {
-
-    [SerializeField] string loadScene1;
-    [SerializeField] string loadScene2;
-    // Start is called before the first frame update
-    void Start()
+    int mainMenu = 0;
+    int level1 = 1;
+    public void PlayButton()
     {
-        
+        SceneManager.LoadScene(level1);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void MainMenuButton()
     {
-        
+        SceneManager.LoadScene(mainMenu);
     }
-
-    public void LoadSceneByName()
+    public void ResetButton()
     {
-        SceneManager.LoadScene(loadScene1);
+        SceneManager.LoadScene(level1);
     }
-    public void LoadSceneByName2()
-    {
-        SceneManager.LoadScene(loadScene2);
-    }
-
-    public void Quit()
+    public void QuitButton()
     {
         Application.Quit();
     }
-
 }

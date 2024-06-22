@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AgentController : MonoBehaviour
 {
-    public CrashController crash;
+    public GhostController ghost;
     public float radius = 3;
     public LayerMask maskNodes;
     public LayerMask maskObs;
@@ -12,35 +12,50 @@ public class AgentController : MonoBehaviour
     public Node target;
     public void RunBFS()
     {
-        var start = GetNearNode(crash.transform.position);
+        var start = GetNearNode(ghost.transform.position);
         if (start == null) return;
         List<Node> path = BFS.Run(start, GetConnections, IsSatiesfies);
-        crash.GetStateWaypoints.SetWayPoints(path);
+        ghost.GetStateWaypoints.SetWayPoints(path);
         box.SetWayPoints(path);
     }
     public void RunDFS()
     {
-        var start = GetNearNode(crash.transform.position);
+        var start = GetNearNode(ghost.transform.position);
         if (start == null) return;
         List<Node> path = DFS.Run(start, GetConnections, IsSatiesfies);
-        crash.GetStateWaypoints.SetWayPoints(path);
+        ghost.GetStateWaypoints.SetWayPoints(path);
         box.SetWayPoints(path);
     }
     public void RunDijkstra()
     {
-        var start = GetNearNode(crash.transform.position);
+        var start = GetNearNode(ghost.transform.position);
         if (start == null) return;
         List<Node> path = Dijkstra.Run(start, GetConnections, IsSatiesfies, GetCost);
-        crash.GetStateWaypoints.SetWayPoints(path);
+        ghost.GetStateWaypoints.SetWayPoints(path);
         box.SetWayPoints(path);
     }
     public void RunAStar()
     {
-        var start = GetNearNode(crash.transform.position);
+        var start = GetNearNode(ghost.transform.position);
         if (start == null) return;
         List<Node> path = AStar.Run(start, GetConnections, IsSatiesfies, GetCost, Heuristic);
-        crash.GetStateWaypoints.SetWayPoints(path);
+        ghost.GetStateWaypoints.SetWayPoints(path);
         box.SetWayPoints(path);
+    }
+
+    public void RunThetaStar()
+    {
+        var start = GetNearNode(ghost.transform.position);
+        if (start == null) return;
+        List<Node> path = ThetaStar.Run(start, GetConnections, IsSatiesfies, GetCost, Heuristic, InView);
+        ghost.GetStateWaypoints.SetWayPoints(path);
+        box.SetWayPoints(path);
+    }
+
+    bool InView(Node grandparent, Node child)
+    {
+        Vector3 dir = child.transform.position - grandparent.transform.position;
+        return !Physics.Raycast(grandparent.transform.position, dir.normalized, dir.magnitude, maskObs);
     }
     float Heuristic(Node current)
     {
@@ -93,6 +108,6 @@ public class AgentController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(crash.transform.position, radius);
+        Gizmos.DrawWireSphere(ghost.transform.position, radius);
     }
 }

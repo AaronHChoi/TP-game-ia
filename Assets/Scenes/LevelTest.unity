@@ -1180,7 +1180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632436645}
   - component: {fileID: 632436644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nodo (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1199,7 +1199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a1155f32277c449ad7f602e74053f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neightbourds: []
+  neightbourds:
+  - {fileID: 1568188691}
+  - {fileID: 1389998846}
   hasTrap: 0
 --- !u!4 &632436645
 Transform:
@@ -1469,7 +1471,8 @@ GameObject:
   - component: {fileID: 861636059}
   - component: {fileID: 861636058}
   - component: {fileID: 861636057}
-  m_Layer: 0
+  - component: {fileID: 861636061}
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,12 +1559,25 @@ Transform:
   m_GameObject: {fileID: 861636056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -115.4, y: -85.1, z: 137.69481}
+  m_LocalPosition: {x: -18.93, y: 2.75, z: -10.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861636061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861636056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781569c4c1ba352428b3017dc6f9a75a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 861636056}
 --- !u!1 &936544249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225855051}
   - component: {fileID: 1225855050}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nodo (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2370,7 +2386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a1155f32277c449ad7f602e74053f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neightbourds: []
+  neightbourds:
+  - {fileID: 1371082817}
+  - {fileID: 2108305265}
   hasTrap: 0
 --- !u!4 &1225855051
 Transform:
@@ -2685,6 +2703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b735eeb9c8e8d4482e5c1dd919b4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  speedRot: 10
 --- !u!114 &1354515222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2711,14 +2731,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints:
-  - {fileID: 1253710708}
-  - {fileID: 1992781830}
-  - {fileID: 1735397178}
-  - {fileID: 641172858}
-  - {fileID: 400913547}
-  - {fileID: 1187708312}
-  - {fileID: 1917216799}
-  - {fileID: 170354848}
+  - {fileID: 1371082818}
+  - {fileID: 1225855051}
+  - {fileID: 2108305266}
+  - {fileID: 1652242330}
+  - {fileID: 1568188692}
+  - {fileID: 632436645}
+  - {fileID: 1389998847}
   target: {fileID: 1838651229}
   attackRange: 2
   angle: 215
@@ -2726,6 +2745,7 @@ MonoBehaviour:
   maskObs:
     serializedVersion: 2
     m_Bits: 64
+  _agentController: {fileID: 1897120734}
 --- !u!114 &1354515224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,7 +2817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371082818}
   - component: {fileID: 1371082817}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nodo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2816,7 +2836,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a1155f32277c449ad7f602e74053f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neightbourds: []
+  neightbourds:
+  - {fileID: 1225855050}
+  - {fileID: 1389998846}
   hasTrap: 0
 --- !u!4 &1371082818
 Transform:
@@ -2843,7 +2865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389998847}
   - component: {fileID: 1389998846}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nodo (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2862,7 +2884,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a1155f32277c449ad7f602e74053f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neightbourds: []
+  neightbourds:
+  - {fileID: 1371082817}
+  - {fileID: 632436644}
   hasTrap: 0
 --- !u!4 &1389998847
 Transform:
@@ -3035,7 +3059,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568188692}
   - component: {fileID: 1568188691}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nodo (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3054,7 +3078,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a1155f32277c449ad7f602e74053f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neightbourds: []
+  neightbourds:
+  - {fileID: 1652242329}
+  - {fileID: 632436644}
   hasTrap: 0
 --- !u!4 &1568188692
 Transform:
@@ -3224,7 +3250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1652242330}
   - component: {fileID: 1652242329}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nodo (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3243,7 +3269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a1155f32277c449ad7f602e74053f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neightbourds: []
+  neightbourds:
+  - {fileID: 2108305265}
+  - {fileID: 1568188691}
   hasTrap: 0
 --- !u!4 &1652242330
 Transform:
@@ -3756,6 +3784,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4948510883846005791, guid: 3ed29ea4d527ff04c9b72e19cacc8ee6, type: 3}
   m_PrefabInstance: {fileID: 2139562891}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1897120733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897120735}
+  - component: {fileID: 1897120734}
+  m_Layer: 0
+  m_Name: AgentControler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1897120734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897120733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10297507cf77274dba3887aa6fbf845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghost: {fileID: 1354515223}
+  radius: 3
+  maskNodes:
+    serializedVersion: 2
+    m_Bits: 128
+  maskObs:
+    serializedVersion: 2
+    m_Bits: 64
+  box: {fileID: 861636061}
+  target: {fileID: 1568188691}
+--- !u!4 &1897120735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897120733}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.228786, y: 3.5857296, z: -11.857965}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1917216798
 GameObject:
   m_ObjectHideFlags: 0
@@ -4143,7 +4225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2108305266}
   - component: {fileID: 2108305265}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Nodo (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4162,7 +4244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a1155f32277c449ad7f602e74053f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neightbourds: []
+  neightbourds:
+  - {fileID: 1225855050}
+  - {fileID: 1652242329}
   hasTrap: 0
 --- !u!4 &2108305266
 Transform:
@@ -4268,3 +4352,4 @@ SceneRoots:
   - {fileID: 1568188692}
   - {fileID: 632436645}
   - {fileID: 1389998847}
+  - {fileID: 1897120735}

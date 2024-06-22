@@ -16,6 +16,9 @@ public class GhostController : MonoBehaviour
     IAlert _alert;
     ITreeNode _root;
     ObstacleAvoidance _obstacleAvoidance;
+    GhosteStateFollowWayPoints<StatesEnum> _stateFollowWayPoints;
+    [SerializeField] AgentController _agentController;
+    GhostModel _ghostModel;
 
     ISteering _seek;
     ISteering _patrol;
@@ -24,12 +27,15 @@ public class GhostController : MonoBehaviour
         _los = GetComponent<LineOfSight>();
         _alert = GetComponent<IAlert>();
         _model = GetComponent<Ghost>();
+        _ghostModel = GetComponent<GhostModel>();
     }
     private void Start()
     {
         InitializeSteergin();
         InitializeFSM();
         InitializedTree();
+
+       
     }
     void InitializeSteergin()
     {
@@ -43,10 +49,14 @@ public class GhostController : MonoBehaviour
     {
         _fsm = new FSM<StatesEnum>();
 
+        _stateFollowWayPoints = new GhosteStateFollowWayPoints<StatesEnum>(_ghostModel);
+       
         var idle = new GhostStateIdle<StatesEnum>();
         var attack = new GhostStateAttack<StatesEnum>(_model);
         var patrol = new GhostStateSteering<StatesEnum>(_model, _patrol, _obstacleAvoidance);
         var seek = new GhostStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
+
+        _stateFollowWayPoints.AddTransition(StatesEnum.Idle, idle);
 
         idle.AddTransition(StatesEnum.Attack, attack);
         idle.AddTransition(StatesEnum.Idle, patrol);
@@ -94,6 +104,7 @@ public class GhostController : MonoBehaviour
     {
         _fsm.OnUpdate();
         _root.Execute();
+        _agentController.RunThetaStar();
     }
     private void OnDrawGizmosSelected()
     {
@@ -102,4 +113,6 @@ public class GhostController : MonoBehaviour
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, angle / 2, 0) * transform.forward * radius);
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, -angle / 2, 0) * transform.forward * radius);
     }
+
+    public IPoints GetStateWaypoints => _stateFollowWayPoints;
 }

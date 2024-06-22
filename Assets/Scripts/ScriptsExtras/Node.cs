@@ -12,7 +12,7 @@ public class Node : MonoBehaviour
     Material mat;
     private void Start()
     {
-        mat = GetComponent<Renderer>().material;
+        //mat = GetComponent<Renderer>().material;
         GetNeightbourd(Vector3.right);
         GetNeightbourd(Vector3.left);
         GetNeightbourd(Vector3.forward);

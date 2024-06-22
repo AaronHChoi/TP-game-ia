@@ -8,7 +8,7 @@ TagManager:
   - 1
   - player
   - Enemy
-  - Grow
+  - Food
   layers:
   - Default
   - TransparentFX

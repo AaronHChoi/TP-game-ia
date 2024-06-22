@@ -18,6 +18,6 @@ public class GhostStateSteering<T> : State<T>
         var dir = _obs.GetDir(_steering.GetDir());
         _ghost.Move(dir);
         _ghost.LookDir(dir);
-        Debug.Log("Seek");
+        //Debug.Log("Seek");
     }
 }

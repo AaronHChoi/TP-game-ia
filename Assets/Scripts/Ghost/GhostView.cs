@@ -6,7 +6,7 @@ public class GhostView : MonoBehaviour
 {
     Ghost _model;
     Rigidbody _rb;
-    [SerializeField]GameManager _gameManager;
+    [SerializeField] GameManager _gameManager;
     //public Animator anim;
 
     private void Start()
@@ -22,6 +22,6 @@ public class GhostView : MonoBehaviour
     void OnAttack()
     {
         Debug.Log("Attack");
-        _gameManager.Lost();
+        _gameManager.EndGame("Lose");
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class SizeManager : MonoBehaviour
 {
     public GameObject player;
-    public float playerValue; // Adjust this value for each object
+    public float playerValue; 
 
 
     private void OnTriggerEnter(Collider collision)

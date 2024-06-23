@@ -7,6 +7,7 @@ public class SizeManager : MonoBehaviour
 {
     public GameObject player;
     public float playerValue; // Adjust this value for each object
+    private GameManager gameManager;
 
 
     private void OnTriggerEnter(Collider collision)

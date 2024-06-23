@@ -50,12 +50,12 @@ public class AgentController : MonoBehaviour
     {
         float cost = 0;
         float multiplierDistance = 1;
-        float multiplierTrap = 200;
+        //float multiplierTrap = 200;
         cost += Vector3.Distance(parent.transform.position, child.transform.position) * multiplierDistance;
-        if (child.hasTrap)
-        {
-            cost += multiplierTrap;
-        }
+        //if (child.hasTrap)
+        //{
+        //    cost += multiplierTrap;
+        //}
         return cost;
     }
     //float GetCost(Vector3 parent, Vector3 child)

@@ -387,12 +387,12 @@ GameObject:
   - component: {fileID: 2936746805270711182}
   - component: {fileID: 7392343617979481059}
   - component: {fileID: -6225277172480770930}
+  - component: {fileID: -6408668312335097930}
+  - component: {fileID: 7775206574429644738}
   - component: {fileID: 6091328355177057544}
   - component: {fileID: 5618978898208214405}
   - component: {fileID: 1122861389391663092}
   - component: {fileID: 6610213012315878882}
-  - component: {fileID: 7775206574429644738}
-  - component: {fileID: -6408668312335097930}
   m_Layer: 7
   m_Name: DuckS1
   m_TagString: Untagged
@@ -488,6 +488,39 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &-6408668312335097930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614044102730658597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26be93d78aaa2e844894646ecf06aca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  timePrediction: 1
+  angle: 215
+  radius: 6
+  maskObs:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &7775206574429644738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614044102730658597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f137950d103cb34890d779a65f83c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  speedRot: 5
 --- !u!114 &6091328355177057544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af17fb9c74d6e24183ca54bc4c962c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 5
+  multiplier: 6
 --- !u!114 &1122861389391663092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,39 +578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 1.5
---- !u!114 &7775206574429644738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2614044102730658597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f137950d103cb34890d779a65f83c0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  turnSmoothTime: 5
---- !u!114 &-6408668312335097930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2614044102730658597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26be93d78aaa2e844894646ecf06aca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 475121945004132835, guid: 3ed29ea4d527ff04c9b72e19cacc8ee6, type: 3}
-  timePrediction: 1
-  angle: 215
-  radius: 6
-  maskObs:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &2843389431571226399
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class Player : MonoBehaviour, IPlayerModel
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     private Rigidbody rb;
-    protected Transform cam;
+    Transform cam;
 
     private void Start()
     {

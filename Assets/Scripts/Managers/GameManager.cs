@@ -26,16 +26,16 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        FoodLeft = GameObject.FindGameObjectsWithTag("Food").Length;
     }
 
     private void Update()
     {
-        FoodLeft = GameObject.FindGameObjectsWithTag("Food").Length;
+       
         UpdateSize();
-        BlockDestroyed();
+        //FoodEaten();
     }
-    public void BlockDestroyed()
+    public void FoodEaten()
     {
         FoodLeft--;
         if(FoodLeft <= 0)

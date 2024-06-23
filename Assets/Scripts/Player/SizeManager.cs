@@ -8,6 +8,7 @@ public class SizeManager : MonoBehaviour
     public GameObject player;
     public float playerValue; // Adjust this value for each object
 
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Food"))
@@ -16,11 +17,13 @@ public class SizeManager : MonoBehaviour
             float otherValue = collision.gameObject.GetComponent<FoodSize>().currentSize;
 
             SizeManager sizeManager = player.GetComponent<SizeManager>();
+            FoodSize foodSize = collision.GetComponent<FoodSize>();
+
 
             // Compare values
             if (playerValue >= otherValue)
             {
-                playerValue += 0.1f;
+                playerValue += foodSize.currentSize/10;
                 player.transform.localScale = new Vector3(sizeManager.playerValue, sizeManager.playerValue, sizeManager.playerValue);
                 collision.gameObject.SetActive(false);
 

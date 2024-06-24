@@ -46,6 +46,6 @@ public class GameManager : MonoBehaviour
 
     private void UpdateSize()
     {
-        sizeText.text = "Tamaño actual= " + sizeManager.playerValue.ToString();
+        sizeText.text = "Curren Size = " + sizeManager.playerValue.ToString();
     }
 }

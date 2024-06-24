@@ -164,14 +164,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72cc36dcbea4234092866de40aa7030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: {fileID: 0}
   target: {fileID: 0}
+  rbTarget: {fileID: 0}
+  timePrediction: 0
   attackRange: 2
   angle: 215
   radius: 6
   maskObs:
     serializedVersion: 2
     m_Bits: 64
-  chaseTime: 1
+  chaseTime: 5
+  evadeTime: 5
   _anim: {fileID: 0}
 --- !u!114 &4944626671619741230
 MonoBehaviour:

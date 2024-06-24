@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostController : MonoBehaviour
+public class SheepController : MonoBehaviour
 {
     public SizeManager size;
     public Transform target;
@@ -13,25 +13,22 @@ public class GhostController : MonoBehaviour
     public float radius;
     public LayerMask maskObs;
     [SerializeField] float chaseTime;
-    [SerializeField] float evadeTime;
     bool seen;
-    bool seen2;
-    GhostModel _model;
+    SheepModel _model;
     FSM<StatesEnum> _fsm;
     LineOfSight _los;
     ITreeNode _root;
     ObstacleAvoidance _obstacleAvoidance;
-    GhostStateFollowPoints<StatesEnum> _stateFollowPoints;
+    SheepStateFollowPoints<StatesEnum> _stateFollowPoints;
     [SerializeField] Animator _anim;
     ISteering _evade;
     ISteering _seek;
     //ISteering _patrol;
     Coroutine _chaseCoroutine;
-    Coroutine _evadeCoroutine;
     private void Awake()
     {
         _los = GetComponent<LineOfSight>();
-        _model = GetComponent<GhostModel>();
+        _model = GetComponent<SheepModel>();
     }
     private void Start()
     {
@@ -51,35 +48,25 @@ public class GhostController : MonoBehaviour
     {
         _fsm = new FSM<StatesEnum>();
 
-        var idle = new GhostStateIdle<StatesEnum>();
-        var attack = new GhostStateAttack<StatesEnum>(_model);
-        var seek = new GhostStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
-        var evade = new GhostStateSteering<StatesEnum>(_model, _evade, _obstacleAvoidance);
-        _stateFollowPoints = new GhostStateFollowPoints<StatesEnum>(_model, _anim);
+        var idle = new SheepStateIdle<StatesEnum>();
+        var seek = new SheepStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
+        var evade = new SheepStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
+        _stateFollowPoints = new SheepStateFollowPoints<StatesEnum>(_model, _anim);
 
-        idle.AddTransition(StatesEnum.Attack, attack);
         idle.AddTransition(StatesEnum.Seek, seek);
         idle.AddTransition(StatesEnum.Waypoints, _stateFollowPoints);
         idle.AddTransition(StatesEnum.Evade, evade);
 
-        attack.AddTransition(StatesEnum.Idle, idle);
-        attack.AddTransition(StatesEnum.Seek, seek);
-        attack.AddTransition(StatesEnum.Waypoints, _stateFollowPoints);
-        attack.AddTransition(StatesEnum.Evade, evade);
-
-        seek.AddTransition(StatesEnum.Attack, attack);
         seek.AddTransition(StatesEnum.Idle, idle);
         seek.AddTransition(StatesEnum.Waypoints, _stateFollowPoints);
         seek.AddTransition(StatesEnum.Evade, evade);
 
         _stateFollowPoints.AddTransition(StatesEnum.Idle, idle);
-        _stateFollowPoints.AddTransition(StatesEnum.Attack, attack);
         _stateFollowPoints.AddTransition(StatesEnum.Seek, seek);
         _stateFollowPoints.AddTransition(StatesEnum.Evade, evade);
 
         evade.AddTransition(StatesEnum.Idle, idle);
         evade.AddTransition(StatesEnum.Seek, seek);
-        evade.AddTransition(StatesEnum.Attack, attack);
         evade.AddTransition(StatesEnum.Waypoints, _stateFollowPoints);
 
         _fsm.SetInit(idle);
@@ -90,7 +77,7 @@ public class GhostController : MonoBehaviour
         var attack = new ActionNode(() => _fsm.Transition(StatesEnum.Attack));
         var seek = new ActionNode(() => _fsm.Transition(StatesEnum.Seek));
         var follow = new ActionNode(() => _fsm.Transition(StatesEnum.Waypoints));
-        var evade = new ActionNode(() => _fsm.Transition(StatesEnum.Evade));
+        //var evade = new ActionNode(() => StartEvade());
 
         //var dic = new Dictionary<ITreeNode, float>();
 
@@ -103,18 +90,8 @@ public class GhostController : MonoBehaviour
         //var qHasSize = new QuestionNode(() => size.playerValue >= 2, evade, qAttackRange);
         var qLos = new QuestionNode(QuestionLoS, qAttackRange/*qHasSize*/, qFollowPoints);
         var qHasLife = new QuestionNode(() => _model.Life > 0, qLos, idle);
-        
+
         _root = qHasLife;
-    }
-    bool QuestionEvadeTime()
-    {
-        StartCoroutine(EvadeTime());
-        return true;
-    }
-    IEnumerator EvadeTime()
-    {
-        yield return new WaitForSeconds(evadeTime);
-        seen2 = false;
     }
     bool QuestionChaseTime()
     {
@@ -128,7 +105,7 @@ public class GhostController : MonoBehaviour
     bool QuestionLoS()
     {
         var currLoS = _los.CheckRange(target.transform) && _los.CheckAngle(target.transform) && _los.CheckView(target.transform);
-        if(!currLoS && seen)
+        if (!currLoS && seen)
         {
             if (_chaseCoroutine == null)
             {
@@ -136,7 +113,7 @@ public class GhostController : MonoBehaviour
             }
             return true;
         }
-        if(_chaseCoroutine != null)
+        if (_chaseCoroutine != null)
         {
             StopCoroutine(ChaseTime());
             _chaseCoroutine = null;
@@ -147,7 +124,7 @@ public class GhostController : MonoBehaviour
     IEnumerator ChaseTime()
     {
         yield return new WaitForSeconds(chaseTime);
-        seen = false;   
+        seen = false;
     }
     private void Update()
     {

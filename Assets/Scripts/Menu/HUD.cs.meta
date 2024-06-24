@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Manager/GameManager.cs.meta
-guid: 10089fb8244974e4594613503c3327fb
-========
-guid: 4aad937c2928ac74d86bfa232fb707da
->>>>>>>> PruebMateo:Assets/Scripts/Menu/MainMenu.cs.meta
+guid: bf725f438b8757849920db8bb6c1bfc9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -22,6 +22,6 @@ public class GhostView : MonoBehaviour
     void OnAttack()
     {
         Debug.Log("Attack");
-        _gameManager.Lost();
+        _gameManager.EndGame("Lost");
     }
 }

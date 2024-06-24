@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 4473785381741041087}
   - component: {fileID: 1644934191628529522}
   - component: {fileID: 1500207685380476601}
-  - component: {fileID: 713680698390756513}
   - component: {fileID: 4944626671619741230}
+  - component: {fileID: 391954877283096501}
   m_Layer: 0
   m_Name: Mole
   m_TagString: Food
@@ -152,7 +152,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameManager: {fileID: 0}
---- !u!114 &713680698390756513
+--- !u!114 &4944626671619741230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224950801439423096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2522c70d7cfb54d9869b171213f84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSize: 2
+--- !u!114 &391954877283096501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,19 +190,6 @@ MonoBehaviour:
   chaseTime: 5
   evadeTime: 5
   _anim: {fileID: 0}
---- !u!114 &4944626671619741230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4224950801439423096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e2522c70d7cfb54d9869b171213f84e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentSize: 2
 --- !u!1001 &3330919630959288205
 PrefabInstance:
   m_ObjectHideFlags: 0

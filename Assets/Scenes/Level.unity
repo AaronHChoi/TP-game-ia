@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4919,6 +4919,7 @@ GameObject:
   - component: {fileID: 211481634}
   - component: {fileID: 211481633}
   - component: {fileID: 211481632}
+  - component: {fileID: 211481635}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -5040,6 +5041,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211481629}
   m_CullTransparentMesh: 1
+--- !u!114 &211481635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211481629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a1f632d42896d48affd8f8c2145d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: d60f46355e5dc4e45b58d78da509240c, type: 2}
+  sprite_name: atlasUI_3
 --- !u!4 &211668952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4702229198241056, guid: 0ba258545da721e488ecb71ffd143b6f, type: 3}
@@ -12710,6 +12725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a1f632d42896d48affd8f8c2145d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: d60f46355e5dc4e45b58d78da509240c, type: 2}
+  sprite_name: atlasUI_0
 --- !u!114 &599896472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20088,6 +20105,7 @@ GameObject:
   - component: {fileID: 1008097124}
   - component: {fileID: 1008097123}
   - component: {fileID: 1008097122}
+  - component: {fileID: 1008097125}
   m_Layer: 5
   m_Name: GoToMenuButton
   m_TagString: Untagged
@@ -20209,6 +20227,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008097119}
   m_CullTransparentMesh: 1
+--- !u!114 &1008097125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008097119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a1f632d42896d48affd8f8c2145d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: d60f46355e5dc4e45b58d78da509240c, type: 2}
+  sprite_name: atlasUI_3
 --- !u!4 &1010691918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4586821900076392, guid: ae9772ea62bbc724eb9b8ef81109f733, type: 3}
@@ -21256,6 +21288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56a1f632d42896d48affd8f8c2145d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: d60f46355e5dc4e45b58d78da509240c, type: 2}
+  sprite_name: atlasUI_1
 --- !u!114 &1059161040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21311,6 +21345,7 @@ GameObject:
   - component: {fileID: 1066217347}
   - component: {fileID: 1066217346}
   - component: {fileID: 1066217345}
+  - component: {fileID: 1066217348}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -21432,6 +21467,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066217342}
   m_CullTransparentMesh: 1
+--- !u!114 &1066217348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066217342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a1f632d42896d48affd8f8c2145d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: d60f46355e5dc4e45b58d78da509240c, type: 2}
+  sprite_name: atlasUI_3
 --- !u!4 &1069948722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4252784401376168, guid: 22a3fd8d3e59a1149bdcd775c0e87241, type: 3}
@@ -24580,6 +24629,7 @@ GameObject:
   - component: {fileID: 1227145064}
   - component: {fileID: 1227145065}
   - component: {fileID: 1227145066}
+  - component: {fileID: 1227145067}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -24647,6 +24697,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1227145067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227145063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a1f632d42896d48affd8f8c2145d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 4343727234628468602, guid: d60f46355e5dc4e45b58d78da509240c, type: 2}
+  sprite_name: atlasUI_1
 --- !u!1 &1228257804
 GameObject:
   m_ObjectHideFlags: 0

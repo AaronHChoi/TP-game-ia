@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DuckController : MonoBehaviour
 {
-    public Rigidbody target;
     public float timePrediction;
     public float angle;
     public float radius;

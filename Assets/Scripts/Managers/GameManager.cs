@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
     string win = "Win";
     string lose = "Lose";
     [SerializeField] SizeManager sizeManager;
-    [SerializeField] Text sizeText;
+    [SerializeField] TextMeshProUGUI sizeText;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -40,12 +41,11 @@ public class GameManager : MonoBehaviour
     }
     public void EndGame(string result)
     {
-        Hud.endScreen.SetActive(true);
+        Hud.endScreen.SetActive(false);
         Hud.ChangeResult(result);
     }
-
     private void UpdateSize()
     {
-        sizeText.text = "Tamaño actual= " + sizeManager.playerValue.ToString();
+        sizeText.text = "Tamaño actual : " + sizeManager.playerValue.ToString();
     }
 }

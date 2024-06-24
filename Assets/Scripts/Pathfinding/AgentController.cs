@@ -10,17 +10,63 @@ public class AgentController : MonoBehaviour
     public float radius = 3f;
     public LayerMask maskObs;
     public LayerMask maskNodes;
-    public Node target;
-    public Box box;
+    public List<Node> targets;
+    private Node currentTarget;
+    private int currentTargetIndex = 0;
+    private bool isMoving = false;
+    private void Start()
+    {
+        if (targets.Count > 0)
+        {
+            currentTarget = targets[currentTargetIndex];
+            RunThetaStar();
+        }
+        else
+        {
+            Debug.LogError("No targets assigned to the AgentController.");
+        }
+    }
+    void Update()
+    {
+        if (isMoving)
+        {
+            float distance = Vector3.Distance(duck.transform.position, currentTarget.transform.position);
+            Debug.Log($"Distance to target: {distance}");
 
+            if (distance <= 1f)
+            {
+                isMoving = false;
+                Debug.Log("Reached target, updating to next target.");
+                UpdateTarget();
+            }
+        }
+    }
     public void RunThetaStar()
     {
         var start = GetNearNode(duck.transform.position);
         if (start == null) return;
         List<Node> path = ThetaStar.Run(start, GetConnections, IsSatiesfies, GetCost, Heuristic, InView);
         duck.GetStateWaypoints.SetWayPoints(path);
-        //box.SetWayPoints(path);
+        isMoving = true;
+        StartCoroutine(CheckCompletion());
     }
+    IEnumerator CheckCompletion()
+    {
+        // Wait until the duck reaches the current target
+        while (Vector3.Distance(duck.transform.position, currentTarget.transform.position) > 0.1f)
+        {
+            yield return null;
+        }
+        // Update to the next target
+        UpdateTarget();
+    }
+    void UpdateTarget()
+    {
+        currentTargetIndex = (currentTargetIndex + 1) % targets.Count;
+        currentTarget = targets[currentTargetIndex];
+        RunThetaStar();
+    }
+
     bool InView(Node grandParent, Node child)
     {
         Debug.Log("RAY");
@@ -28,7 +74,6 @@ public class AgentController : MonoBehaviour
     }
     bool InView(Vector3 a, Vector3 b)
     {
-        //a->b  b-a
         Vector3 dir = b - a;
         return !Physics.Raycast(a, dir.normalized, dir.magnitude, maskObs);
     }
@@ -36,35 +81,16 @@ public class AgentController : MonoBehaviour
     {
         float heuristic = 0;
         float multiplierDistance = 1;
-        heuristic += Vector3.Distance(current.transform.position, target.transform.position) * multiplierDistance;
+        heuristic += Vector3.Distance(current.transform.position, currentTarget.transform.position) * multiplierDistance;
         return heuristic;
     }
-    //float Heuristic(Vector3 current)
-    //{
-    //    float heuristic = 0;
-    //    float multiplierDistance = 1;
-    //    heuristic += Vector3.Distance(current, box.transform.position) * multiplierDistance;
-    //    return heuristic;
-    //}
     float GetCost(Node parent, Node child)
     {
         float cost = 0;
         float multiplierDistance = 1;
-        //float multiplierTrap = 200;
         cost += Vector3.Distance(parent.transform.position, child.transform.position) * multiplierDistance;
-        //if (child.hasTrap)
-        //{
-        //    cost += multiplierTrap;
-        //}
         return cost;
     }
-    //float GetCost(Vector3 parent, Vector3 child)
-    //{
-    //    float cost = 0;
-    //    float multiplierDistance = 1;
-    //    cost += Vector3.Distance(parent, child) * multiplierDistance;
-    //    return cost;
-    //}
     Node GetNearNode(Vector3 pos)
     {
         var nodes = Physics.OverlapSphere(pos, radius, maskNodes);
@@ -92,12 +118,8 @@ public class AgentController : MonoBehaviour
     }
     bool IsSatiesfies(Node current)
     {
-        return current == target;
+        return current == currentTarget;
     }
-    //bool IsSatiesfies(Vector3 current)
-    //{
-    //    return Vector3.Distance(current, box.transform.position) < 2 && InView(current, box.transform.position);
-    //}
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;

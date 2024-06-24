@@ -27,25 +27,34 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        FooodLeft = GameObject.FindGameObjectsWithTag("Food").Length;
         FoodDestroy();
         UpdateSize();
     }
     public void FoodDestroy()
     {
+        FooodLeft = GameObject.FindGameObjectsWithTag("Food").Length;
         FooodLeft--;
         if(FooodLeft <= 0)
         {
            EndGame(win);
         }
     }
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+    public void UnPause()
+    {
+        Time.timeScale = 1f;
+    }
     public void EndGame(string result)
     {
-        Hud.endScreen.SetActive(false);
+        Pause();
+        Hud.endScreen.SetActive(true);
         Hud.ChangeResult(result);
     }
     private void UpdateSize()
     {
-        sizeText.text = "Tamaño actual : " + sizeManager.playerValue.ToString();
+        sizeText.text = "Actual Size: " + sizeManager.playerValue.ToString();
     }
 }

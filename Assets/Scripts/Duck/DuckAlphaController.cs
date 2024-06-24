@@ -7,7 +7,7 @@ public class DuckAlphaController : MonoBehaviour
     DuckAlphaModel _model;
     Animator _anim;
     FSM<StatesEnum> _fsm;
-    DuckStateFollowPoints<StatesEnum> _stateFollowPoints;
+    AlphaDuckStateFollowPoints<StatesEnum> _stateFollowPoints;
     ITreeNode _root;
 
     void Awake()
@@ -25,7 +25,7 @@ public class DuckAlphaController : MonoBehaviour
     {
         _fsm = new FSM<StatesEnum>();
         var idle = new DuckStateIdle<StatesEnum>();
-        _stateFollowPoints = new DuckStateFollowPoints<StatesEnum>(_model, _anim);
+        _stateFollowPoints = new AlphaDuckStateFollowPoints<StatesEnum>(_model);
 
         idle.AddTransition(StatesEnum.Waypoints, _stateFollowPoints);
         _stateFollowPoints.AddTransition(StatesEnum.Idle, idle);

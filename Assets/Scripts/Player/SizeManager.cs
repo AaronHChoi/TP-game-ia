@@ -7,10 +7,8 @@ public class SizeManager : MonoBehaviour
 {
     public GameObject player;
     public float playerValue; // Adjust this value for each object
-    private GameManager gameManager;
 
-
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Food"))
         {
@@ -18,13 +16,12 @@ public class SizeManager : MonoBehaviour
             float otherValue = collision.gameObject.GetComponent<FoodSize>().currentSize;
 
             SizeManager sizeManager = player.GetComponent<SizeManager>();
-            FoodSize foodSize = collision.GetComponent<FoodSize>();
-
+            FoodSize foodSize = collision.gameObject.GetComponent<FoodSize>();
 
             // Compare values
             if (playerValue >= otherValue)
             {
-                playerValue += foodSize.currentSize/10;
+                playerValue += foodSize.currentSize / 10;
                 player.transform.localScale = new Vector3(sizeManager.playerValue, sizeManager.playerValue, sizeManager.playerValue);
                 collision.gameObject.SetActive(false);
 
@@ -32,7 +29,8 @@ public class SizeManager : MonoBehaviour
             else if (playerValue < otherValue)
             {
                 Debug.Log("me comieron");
-                gameManager.EndGame("Lose");
+                //gameManager.EndGame("Lose");
+                GameManager.Instance.EndGame("Lose");
             }
         }
     }

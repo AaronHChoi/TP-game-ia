@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4972467528806961750}
   - component: {fileID: 4050034666527006002}
   - component: {fileID: 8183081883841707864}
+  - component: {fileID: 7722782045810172496}
   m_Layer: 7
   m_Name: Duck
   m_TagString: Food
@@ -88,7 +89,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &6087205082315490570
 MonoBehaviour:
@@ -102,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f137950d103cb34890d779a65f83c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4.5
   speedRot: 5
 --- !u!114 &7125047934725472396
 MonoBehaviour:
@@ -134,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af17fb9c74d6e24183ca54bc4c962c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 5
+  multiplier: 3.5
 --- !u!114 &8508010780700532180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7d8b8a896d75343972a2ef0e5288f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personalArea: 5
-  multiplier: 4
+  personalArea: 3.5
+  multiplier: 1.4
 --- !u!114 &3943227797455287755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1bebba33a70cb4399e01fd23eaaff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1.5
+  multiplier: 1.4
 --- !u!114 &4972467528806961750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 8
-  maxBoids: 10
+  maxBoids: 15
   boidMask:
     serializedVersion: 2
     m_Bits: 128
@@ -206,6 +207,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSize: 1
+--- !u!114 &7722782045810172496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303258093695664670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e9556f50eaf2947afe7a7c533b2fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  predatorRange: 10
+  multiplier: 50
+  predatorMax: 5
+  predatorMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &4530166967895745683
 PrefabInstance:
   m_ObjectHideFlags: 0

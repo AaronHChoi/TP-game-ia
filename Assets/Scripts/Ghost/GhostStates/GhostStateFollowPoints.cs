@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DuckStateFollowPoints<T> : State<T>, IPoints
+public class GhostStateFollowPoints<T> : State<T>, IPoints
 {
-    Duck _model;
+    GhostModel _model;
     List<Vector3> _waypoints;
     int _nextPoint = 0;
     bool _isFinishPath = true;
-    public DuckStateFollowPoints(Duck model)
+    Animator _anim;
+    public GhostStateFollowPoints(GhostModel model, Animator anim)
     {
         _model = model;
+        _anim = anim;
     }
     public override void Enter()
     {
         base.Enter();
+        //_anim.SetFloat("Vel", 1);
     }
     public override void Execute()
     {
@@ -24,6 +27,7 @@ public class DuckStateFollowPoints<T> : State<T>, IPoints
     public override void Sleep()
     {
         base.Sleep();
+        //_anim.SetFloat("Vel", 0);
     }
     public void SetWayPoints(List<Node> newPoints)
     {

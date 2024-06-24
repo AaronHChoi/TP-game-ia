@@ -1,96 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class AgentController : MonoBehaviour
 {
-    public DuckAlphaController duck;
-    public float radius = 3f;
-    public LayerMask maskObs;
+    public DuckAlphaController crash;
+    public float radius = 3;
     public LayerMask maskNodes;
-    public List<Node> targets;
-    private Node currentTarget;
-    private int currentTargetIndex = 0;
-    private bool isMoving = false;
+    public LayerMask maskObs;
+    public Box box;
+    public Node target;
     private void Start()
     {
-        if (targets.Count > 0)
-        {
-            currentTarget = targets[currentTargetIndex];
-            RunThetaStar();
-        }
-        else
-        {
-            Debug.LogError("No targets assigned to the AgentController.");
-        }
-    }
-    void Update()
-    {
-        if (isMoving)
-        {
-            float distance = Vector3.Distance(duck.transform.position, currentTarget.transform.position);
-            Debug.Log($"Distance to target: {distance}");
+        Debug.Log("1");
 
-            if (distance <= 1f)
-            {
-                isMoving = false;
-                Debug.Log("Reached target, updating to next target.");
-                UpdateTarget();
-            }
-        }
+        RunAStar();
+        Debug.Log("2");
     }
-    public void RunThetaStar()
+    public void RunAStar()
     {
-        var start = GetNearNode(duck.transform.position);
+        var start = GetNearNode(crash.transform.position);
         if (start == null) return;
-        List<Node> path = ThetaStar.Run(start, GetConnections, IsSatiesfies, GetCost, Heuristic, InView);
-        duck.GetStateWaypoints.SetWayPoints(path);
-        isMoving = true;
-        StartCoroutine(CheckCompletion());
-    }
-    IEnumerator CheckCompletion()
-    {
-        // Wait until the duck reaches the current target
-        while (Vector3.Distance(duck.transform.position, currentTarget.transform.position) > 0.1f)
+        List<Node> path = AStar.Run(start, GetConnections, IsSatiesfies, GetCost, Heuristic);
+        Debug.Log(path.Count);
+        //crash.GetStateWaypoints.SetWayPoints(path);
+        if (crash.GetStateWaypoints == null)
         {
-            yield return null;
+            Debug.LogError("State waypoints is null.");
+            return;
         }
-        // Update to the next target
-        UpdateTarget();
+        crash.GetStateWaypoints.SetWayPoints(path);
+        box.SetWayPoints(path);
     }
-    void UpdateTarget()
-    {
-        currentTargetIndex = (currentTargetIndex + 1) % targets.Count;
-        currentTarget = targets[currentTargetIndex];
-        RunThetaStar();
-    }
-
-    bool InView(Node grandParent, Node child)
-    {
-        Debug.Log("RAY");
-        return InView(grandParent.transform.position, child.transform.position);
-    }
-    bool InView(Vector3 a, Vector3 b)
-    {
-        Vector3 dir = b - a;
-        return !Physics.Raycast(a, dir.normalized, dir.magnitude, maskObs);
-    }
+    //bool InView(Node grandParent, Node child)
+    //{
+    //    Debug.Log("RAY");
+    //    return InView(grandParent.transform.position, child.transform.position);
+    //}
+    //bool InView(Vector3 a, Vector3 b)
+    //{
+    //    //a->b  b-a
+    //    Vector3 dir = b - a;
+    //    return !Physics.Raycast(a, dir.normalized, dir.magnitude, maskObs);
+    //}
     float Heuristic(Node current)
     {
         float heuristic = 0;
         float multiplierDistance = 1;
-        heuristic += Vector3.Distance(current.transform.position, currentTarget.transform.position) * multiplierDistance;
+        heuristic += Vector3.Distance(current.transform.position, target.transform.position) * multiplierDistance;
         return heuristic;
     }
+    //float Heuristic(Vector3 current)
+    //{
+    //    float heuristic = 0;
+    //    float multiplierDistance = 1;
+    //    heuristic += Vector3.Distance(current, box.transform.position) * multiplierDistance;
+    //    return heuristic;
+    //}
     float GetCost(Node parent, Node child)
     {
         float cost = 0;
         float multiplierDistance = 1;
         cost += Vector3.Distance(parent.transform.position, child.transform.position) * multiplierDistance;
+        
         return cost;
     }
+    //float GetCost(Vector3 parent, Vector3 child)
+    //{
+    //    float cost = 0;
+    //    float multiplierDistance = 1;
+    //    cost += Vector3.Distance(parent, child) * multiplierDistance;
+    //    return cost;
+    //}
     Node GetNearNode(Vector3 pos)
     {
         var nodes = Physics.OverlapSphere(pos, radius, maskNodes);
@@ -116,13 +97,36 @@ public class AgentController : MonoBehaviour
     {
         return current.neightbourds;
     }
+    //List<Vector3> GetConnections(Vector3 current)
+    //{
+    //    var connections = new List<Vector3>();
+
+    //    for (int x = -1; x <= 1; x++)
+    //    {
+    //        for (int z = -1; z <= 1; z++)
+    //        {
+    //            if (z == 0 && x == 0) continue;
+    //            Vector3 point = myGrid.GetPosInGrid(new Vector3(current.x + x, current.y, current.z + z));
+    //            Debug.Log(point + "  " + myGrid.IsRightPos(point));
+    //            if (myGrid.IsRightPos(point))
+    //            {
+    //                connections.Add(point);
+    //            }
+    //        }
+    //    }
+    //    return connections;
+    //}
     bool IsSatiesfies(Node current)
     {
-        return current == currentTarget;
+        return current == target;
     }
+    //bool IsSatiesfies(Vector3 current)
+    //{
+    //    return Vector3.Distance(current, box.transform.position) < 2 && InView(current, box.transform.position);
+    //}
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(duck.transform.position, radius);
+        Gizmos.DrawWireSphere(crash.transform.position, radius);
     }
 }

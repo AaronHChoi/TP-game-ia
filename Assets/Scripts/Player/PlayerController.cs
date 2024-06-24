@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     IPlayerModel _player;
-    public AgentController _controller;
     Rigidbody _rb;
     [SerializeField] Animator _anim;
     FSM<StatesEnum> _fsm;
@@ -30,18 +29,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _fsm.OnUpdate();
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            _controller.RunThetaStar();
-        }
-        if (_rb.velocity.x != 0 || _rb.velocity.z != 0)
-        {
-            _anim.SetBool("isWalking", true);
-        }
-        else
-        {
-            _anim.SetBool("isWalking", false);
-        }
+        //if (_rb.velocity.x != 0 || _rb.velocity.z != 0)
+        //{
+        //    _anim.SetBool("isWalking", true);
+        //}
+        //else
+        //{
+        //    _anim.SetBool("isWalking", false);
+        //}
     }
     public void ChangeModel(IPlayerModel model)
     {

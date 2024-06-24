@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DuckStateFollowPoints<T> : State<T>, IPoints
+public class AlphaDuckStateFollowPoints<T> : State<T>, IPoints
 {
-    Duck _model;
+    DuckAlphaModel _model;
     List<Vector3> _waypoints;
     int _nextPoint = 0;
     bool _isFinishPath = true;
-    public DuckStateFollowPoints(Duck model)
+    public AlphaDuckStateFollowPoints(DuckAlphaModel model)
     {
         _model = model;
     }

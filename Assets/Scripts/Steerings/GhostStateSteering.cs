@@ -5,9 +5,9 @@ using UnityEngine;
 public class GhostStateSteering<T> : State<T>
 {
     ISteering _steering;
-    Ghost _ghost;
+    GhostModel _ghost;
     ObstacleAvoidance _obs;
-    public GhostStateSteering(Ghost ghost, ISteering steering, ObstacleAvoidance obs)
+    public GhostStateSteering(GhostModel ghost, ISteering steering, ObstacleAvoidance obs)
     {
         _steering = steering;
         _ghost = ghost;

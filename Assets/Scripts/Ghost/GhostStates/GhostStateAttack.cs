@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GhostStateAttack<T> : State<T>
 {
-    Ghost _model;
-    public GhostStateAttack(Ghost model)
+    GhostModel _model;
+    public GhostStateAttack(GhostModel model)
     {
         _model = model;
     }

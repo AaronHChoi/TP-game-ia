@@ -24,4 +24,8 @@ public class Duck : MonoBehaviour, IBoid
         if (dir.x == 0 && dir.z == 0) return;
         transform.forward = Vector3.Lerp(transform.forward, dir, Time.deltaTime * speedRot);
     }
+    public void SetPosition(Vector3 pos)
+    {
+        transform.position = pos;
+    }
 }

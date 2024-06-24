@@ -10,5 +10,6 @@ public enum StatesEnum
     Attack,
     Seek,
     Patrol,
-    Waypoints
+    Waypoints,
+    Evade
 }

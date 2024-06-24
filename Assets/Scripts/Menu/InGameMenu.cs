@@ -28,18 +28,18 @@ public class InGameMenu : MonoBehaviour
     public void ResumeGame()
     {
         menuUI.SetActive(false);
-        Time.timeScale = 1f;
+        GameManager.Instance.UnPause();
         isPaused = false;
     }
     public void PauseGame()
     {
         menuUI.SetActive(true);
-        Time.timeScale = 0f;
+        GameManager.Instance.Pause();
         isPaused = true;
     }
     public void GoToMenu()
     {
-        Time.timeScale = 1f;
+        GameManager.Instance.UnPause();
         SceneManager.LoadScene(0);
     }
     public void QuitGame()

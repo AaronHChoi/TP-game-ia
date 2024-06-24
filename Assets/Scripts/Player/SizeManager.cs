@@ -32,6 +32,7 @@ public class SizeManager : MonoBehaviour
             else if (playerValue < otherValue)
             {
                 Debug.Log("me comieron");
+                gameManager.EndGame("Lose");
             }
         }
     }

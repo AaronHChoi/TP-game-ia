@@ -15,7 +15,7 @@ public class GhostController : MonoBehaviour
     [SerializeField] float chaseTime;
     [SerializeField] float evadeTime;
     bool seen;
-    bool seen2;
+    //bool seen2;
     GhostModel _model;
     FSM<StatesEnum> _fsm;
     LineOfSight _los;
@@ -32,6 +32,7 @@ public class GhostController : MonoBehaviour
     {
         _los = GetComponent<LineOfSight>();
         _model = GetComponent<GhostModel>();
+        _stateFollowPoints = new GhostStateFollowPoints<StatesEnum>(_model, _anim);
     }
     private void Start()
     {
@@ -55,7 +56,7 @@ public class GhostController : MonoBehaviour
         var attack = new GhostStateAttack<StatesEnum>(_model);
         var seek = new GhostStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
         var evade = new GhostStateSteering<StatesEnum>(_model, _evade, _obstacleAvoidance);
-        _stateFollowPoints = new GhostStateFollowPoints<StatesEnum>(_model, _anim);
+        //_stateFollowPoints = new GhostStateFollowPoints<StatesEnum>(_model, _anim);
 
         idle.AddTransition(StatesEnum.Attack, attack);
         idle.AddTransition(StatesEnum.Seek, seek);
@@ -114,7 +115,7 @@ public class GhostController : MonoBehaviour
     IEnumerator EvadeTime()
     {
         yield return new WaitForSeconds(evadeTime);
-        seen2 = false;
+        //seen2 = false;
     }
     bool QuestionChaseTime()
     {

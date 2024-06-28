@@ -14,6 +14,7 @@ public class DuckAlphaController : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _model = GetComponent<DuckAlphaModel>();
+        _stateFollowPoints = new AlphaDuckStateFollowPoints<StatesEnum>(_model);
     }
     private void Start()
     {
@@ -25,7 +26,7 @@ public class DuckAlphaController : MonoBehaviour
     {
         _fsm = new FSM<StatesEnum>();
         var idle = new DuckStateIdle<StatesEnum>();
-        _stateFollowPoints = new AlphaDuckStateFollowPoints<StatesEnum>(_model);
+        
 
         idle.AddTransition(StatesEnum.Waypoints, _stateFollowPoints);
         _stateFollowPoints.AddTransition(StatesEnum.Idle, idle);

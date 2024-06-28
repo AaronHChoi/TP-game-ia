@@ -29,6 +29,7 @@ public class SheepController : MonoBehaviour
     {
         _los = GetComponent<LineOfSight>();
         _model = GetComponent<SheepModel>();
+        _stateFollowPoints = new SheepStateFollowPoints<StatesEnum>(_model, _anim);
     }
     private void Start()
     {
@@ -51,7 +52,7 @@ public class SheepController : MonoBehaviour
         var idle = new SheepStateIdle<StatesEnum>();
         var seek = new SheepStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
         var evade = new SheepStateSteering<StatesEnum>(_model, _seek, _obstacleAvoidance);
-        _stateFollowPoints = new SheepStateFollowPoints<StatesEnum>(_model, _anim);
+        
 
         idle.AddTransition(StatesEnum.Seek, seek);
         idle.AddTransition(StatesEnum.Waypoints, _stateFollowPoints);

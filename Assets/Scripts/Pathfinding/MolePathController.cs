@@ -14,6 +14,17 @@ public class MolePathController : MonoBehaviour
     private bool isMoving = false;
     private void Start()
     {
+        if (mole == null)
+        {
+            Debug.LogError("Mole is not assigned.");
+            return;
+        }
+
+        if (targets == null || targets.Count == 0)
+        {
+            Debug.LogError("Targets list is empty or null.");
+            return;
+        }
         PickRandomTarget();
         RunThetaStar();
     }
@@ -34,14 +45,31 @@ public class MolePathController : MonoBehaviour
     public void RunThetaStar()
     {
         var start = GetNearNode(mole.transform.position);
+        if (start == null)
+        {
+            Debug.LogError("Start node is null.");
+            return;
+        }
         if (start == null) return;
         List<Node> path = ThetaStar.Run(start, GetConnections, IsSatiesfies, GetCost, Heuristic, InView);
+        if (path == null || path.Count == 0)
+        {
+            Debug.LogError("Path is null or empty.");
+            return;
+        }
+        Debug.Log("Path found, setting waypoints.");
+        if (mole.GetStateWaypoints == null)
+        {
+            Debug.LogError("mole.GetStateWaypoints is null.");
+            return;
+        }
         mole.GetStateWaypoints.SetWayPoints(path);
         isMoving = true;
         StartCoroutine(CheckCompletion());
     }
     IEnumerator CheckCompletion()
     {
+        Debug.Log("Starting CheckCompletion coroutine.");
         while (Vector3.Distance(mole.transform.position, currentTarget.transform.position) > 0.1f)
         {
             yield return null;

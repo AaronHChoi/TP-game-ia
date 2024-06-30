@@ -15,7 +15,6 @@ public class GhostController : MonoBehaviour
     [SerializeField] float chaseTime;
     [SerializeField] float evadeTime;
     bool seen;
-    //bool seen2;
     GhostModel _model;
     FSM<StatesEnum> _fsm;
     LineOfSight _los;
@@ -101,8 +100,8 @@ public class GhostController : MonoBehaviour
         var qIsCooldown = new QuestionNode(() => _model.IsCooldown, idle, seek);
         var qIsCooldownOutOfRange = new QuestionNode(() => _model.IsCooldown, idle, seek);
         var qAttackRange = new QuestionNode(QuestionAttackRange, qIsCooldown, qIsCooldownOutOfRange);
-        //var qHasSize = new QuestionNode(() => size.playerValue >= 2, evade, qAttackRange);
-        var qLos = new QuestionNode(QuestionLoS, qAttackRange/*qHasSize*/, qFollowPoints);
+        var qSizeCheck = new QuestionNode(() => size.playerValue >= 2, evade, qAttackRange);
+        var qLos = new QuestionNode(QuestionLoS, /*qAttackRange*/qSizeCheck, qFollowPoints);
         var qHasLife = new QuestionNode(() => _model.Life > 0, qLos, idle);
         
         _root = qHasLife;
@@ -115,7 +114,7 @@ public class GhostController : MonoBehaviour
     IEnumerator EvadeTime()
     {
         yield return new WaitForSeconds(evadeTime);
-        //seen2 = false;
+        seen = false;
     }
     bool QuestionChaseTime()
     {
@@ -135,12 +134,21 @@ public class GhostController : MonoBehaviour
             {
                 _chaseCoroutine = StartCoroutine(ChaseTime());
             }
+            if (_evadeCoroutine == null)
+            {
+                _evadeCoroutine = StartCoroutine(EvadeTime());
+            }
             return true;
         }
         if(_chaseCoroutine != null)
         {
             StopCoroutine(ChaseTime());
             _chaseCoroutine = null;
+        }
+        if (_evadeCoroutine != null)
+        {
+            StopCoroutine(EvadeTime());
+            _evadeCoroutine = null;
         }
         seen = currLoS;
         return seen;

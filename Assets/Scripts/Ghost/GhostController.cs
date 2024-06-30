@@ -106,11 +106,6 @@ public class GhostController : MonoBehaviour
         
         _root = qHasLife;
     }
-    bool QuestionEvadeTime()
-    {
-        StartCoroutine(EvadeTime());
-        return true;
-    }
     IEnumerator EvadeTime()
     {
         yield return new WaitForSeconds(evadeTime);

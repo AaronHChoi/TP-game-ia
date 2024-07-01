@@ -63,17 +63,25 @@ public class SheepController : EnemyController
         var follow = new ActionNode(() => _fsm.Transition(StatesEnum.Waypoints));
         var evade = new ActionNode(() => _fsm.Transition(StatesEnum.Evade));
 
-        //var dic = new Dictionary<ITreeNode, float>();
+        var dic = new Dictionary<ITreeNode, float>();
+
+        var random = new RandomNode(dic);
 
         var qFollowPoints = new QuestionNode(() => _stateFollowPoints.IsFinishPath, idle, follow);
-
-        var qKeepChaising = new QuestionNode(QuestionChaseTime, seek, qFollowPoints);
+        
+        dic[seek] = 10;
+        dic[qFollowPoints] = 60;
+        
+        var qKeepChaising = new QuestionNode(QuestionChaseTime, seek, random);
         var qIsCooldown = new QuestionNode(() => _model.IsCooldown, idle, seek);
         var qIsCooldownOutOfRange = new QuestionNode(() => _model.IsCooldown, idle, seek);
         var qAttackRange = new QuestionNode(QuestionAttackRange, qIsCooldown, qIsCooldownOutOfRange);
         var qSizeCheck = new QuestionNode(() => size.playerValue >= 3, evade, qAttackRange);
         var qLos = new QuestionNode(QuestionLoS, qSizeCheck, qFollowPoints);
         var qHasLife = new QuestionNode(() => _model.Life > 0, qLos, idle);
+
+        
+        
 
         _root = qHasLife;
     }

@@ -6,7 +6,6 @@ public class CamaraTest : MonoBehaviour
 {
     public Transform posTP;
 
-    //Camara TP
     public float rotSpeed; 
     public float rotMin, rotMax; 
     float mouseX, mouseY;
@@ -18,16 +17,28 @@ public class CamaraTest : MonoBehaviour
     }
     private void Update()
     {
-        mouseX += rotSpeed * Input.GetAxis("Mouse X");
-        mouseY -= rotSpeed * Input.GetAxis("Mouse Y");
-        mouseY = Mathf.Clamp(mouseY, rotMin, rotMax);
+        if (GameManager.Instance.camaraActive)
+        {
+            mouseX += rotSpeed * Input.GetAxis("Mouse X");
+            mouseY -= rotSpeed * Input.GetAxis("Mouse Y");
+            mouseY = Mathf.Clamp(mouseY, rotMin, rotMax);
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
     }
     private void LateUpdate()
     {
-        player.rotation = Quaternion.Euler(0f, mouseX, 0f);
-        target.rotation = Quaternion.Euler(mouseY, mouseX, 0.0f);
+        if (GameManager.Instance.camaraActive)
+        {
+            player.rotation = Quaternion.Euler(0f, mouseX, 0f);
+            target.rotation = Quaternion.Euler(mouseY, mouseX, 0.0f);
 
-        transform.position = posTP.position;
-        transform.LookAt(player);
+            transform.position = posTP.position;
+            transform.LookAt(player);
+        }
     }
 }

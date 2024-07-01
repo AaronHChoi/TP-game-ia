@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class HUD : MonoBehaviour
 {
-
     public GameObject endScreen;
     public TextMeshProUGUI result;
     public void ChangeResult(string newText)

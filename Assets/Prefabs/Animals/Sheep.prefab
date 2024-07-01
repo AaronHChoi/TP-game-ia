@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4720626479125274108}
   - component: {fileID: 992313486333211687}
   - component: {fileID: 7143982887489673328}
-  - component: {fileID: 6095554328275684772}
   - component: {fileID: 7647295381118597773}
   - component: {fileID: 2801393431210602414}
+  - component: {fileID: 5453018873755772712}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Food
@@ -84,7 +84,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &7143982887489673328
 MonoBehaviour:
@@ -103,31 +103,6 @@ MonoBehaviour:
   maskObs:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &6095554328275684772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8691932688587014739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b1b9bcca63f4e4bbca87f251818ca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoS: 0
-  size: {fileID: 0}
-  target: {fileID: 0}
-  rbTarget: {fileID: 0}
-  timePrediction: 0
-  attackRange: 2
-  angle: 215
-  radius: 6
-  maskObs:
-    serializedVersion: 2
-    m_Bits: 64
-  chaseTime: 5
-  _anim: {fileID: 0}
 --- !u!114 &7647295381118597773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +133,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSize: 3
+--- !u!114 &5453018873755772712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691932688587014739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b1b9bcca63f4e4bbca87f251818ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {fileID: 0}
+  target: {fileID: 0}
+  rbTarget: {fileID: 0}
+  timePrediction: 0
+  attackRange: 2
+  angle: 215
+  radius: 6
+  maskObs:
+    serializedVersion: 2
+    m_Bits: 64
+  chaseTime: 5
+  evadeTime: 5
+  seen: 0
+  _anim: {fileID: 0}
 --- !u!1001 &3817157995027506047
 PrefabInstance:
   m_ObjectHideFlags: 0

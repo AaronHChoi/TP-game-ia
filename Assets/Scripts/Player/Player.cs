@@ -5,6 +5,8 @@ public class Player : MonoBehaviour, IPlayerModel
 {
     public float speed;
     public float turnSmoothTime = 0.1f;
+    public float playerValue;
+    public GameObject player;
     private float turnSmoothVelocity;
     private Rigidbody rb;
     Transform cam;
@@ -14,7 +16,6 @@ public class Player : MonoBehaviour, IPlayerModel
         rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
     }
-
     public virtual void Move(Vector3 dir)
     {
         if (dir.magnitude >= 0.1f)
@@ -40,6 +41,28 @@ public class Player : MonoBehaviour, IPlayerModel
         {
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Food"))
+        {
+            // Get the value of the other object
+            float otherValue = collision.gameObject.GetComponent<FoodSize>().currentSize;
+
+            FoodSize foodSize = collision.gameObject.GetComponent<FoodSize>();
+
+            // Compare values
+            if (playerValue >= otherValue)
+            {
+                playerValue += foodSize.currentSize / 10;
+                player.transform.localScale = new Vector3(playerValue, playerValue, playerValue);
+                collision.gameObject.SetActive(false);
+            }
+            else if (playerValue < otherValue)
+            {
+                GameManager.Instance.EndGame("Lose");
+            }
         }
     }
 }

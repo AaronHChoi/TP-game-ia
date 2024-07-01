@@ -2,37 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DuckController : MonoBehaviour
+public class DuckController : EnemyController
 {
-    public float timePrediction;
-    public float angle;
-    public float radius;
-    public LayerMask maskObs;
     DuckStateFollowPoints<StatesEnum> _stateFollowPoints;
-    FSM<StatesEnum> _fsm;
     ISteering _steering;
     Duck _duck;
-    ObstacleAvoidanceV2 _obstacleAvoidance;
-    private void Awake()
+    ObstacleAvoidanceV2 _obstacleAvoidancev2;
+    protected override void Awake()
     {
+        base.Awake();
         _duck = GetComponent<Duck>();
-        InitializeSteerings();
-        InitializeFSM();
-        InitializedTree();
     }
-
-    void InitializeSteerings()
+    protected override void Start()
+    {
+        base.Start();
+    }
+    protected override void InitializeSteering()
     {
         _steering = GetComponent<FlockingManager>();
-        _obstacleAvoidance = new ObstacleAvoidanceV2(_duck.transform, angle, radius, maskObs);
+        _obstacleAvoidancev2 = new ObstacleAvoidanceV2(_duck.transform, angle, radius, maskObs);
     }
-
-    void InitializeFSM()
+    protected override void InitializeFSM()
     {
         _fsm = new FSM<StatesEnum>();
 
         var idle = new DuckStateIdle<StatesEnum>();
-        var steering = new DuckStateSteering<StatesEnum>(_duck, _steering, _obstacleAvoidance);
+        var steering = new DuckStateSteering<StatesEnum>(_duck, _steering, _obstacleAvoidancev2);
         _stateFollowPoints = new DuckStateFollowPoints<StatesEnum>(_duck);
 
         idle.AddTransition(StatesEnum.Walk, steering);
@@ -46,7 +41,7 @@ public class DuckController : MonoBehaviour
 
         _fsm.SetInit(steering);
     }
-    void InitializedTree()
+    protected override void InitializeTree()
     {
         var idle = new ActionNode(() => _fsm.Transition(StatesEnum.Idle));
         var walk = new ActionNode(() => _fsm.Transition(StatesEnum.Walk));
@@ -55,16 +50,33 @@ public class DuckController : MonoBehaviour
         var qFollowPoints = new QuestionNode(() => _stateFollowPoints.IsFinishPath, idle, follow);
         
     }
-    void Update()
+    protected override void Update()
     {
         _fsm.OnUpdate();
     }
     public IPoints GetStateWaypoints => _stateFollowPoints;
-    private void OnDrawGizmosSelected()
+    protected override void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, radius);
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, angle / 2, 0) * transform.forward * radius);
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, -angle / 2, 0) * transform.forward * radius);
+       base.OnDrawGizmosSelected();
+    }
+    protected override IEnumerator EvadeTime()
+    {
+        yield break;
+    }
+    protected override bool QuestionChaseTime()
+    {
+        return false;
+    }
+    protected override bool QuestionAttackRange()
+    {
+        return false;
+    }
+    protected override bool QuestionLoS()
+    {
+        return false;
+    }
+    protected override IEnumerator ChaseTime()
+    {
+        yield break;
     }
 }

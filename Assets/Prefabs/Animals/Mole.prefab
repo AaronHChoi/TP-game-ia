@@ -171,6 +171,7 @@ MonoBehaviour:
     m_Bits: 64
   chaseTime: 5
   evadeTime: 5
+  seen: 0
   _anim: {fileID: 0}
 --- !u!1001 &3330919630959288205
 PrefabInstance:

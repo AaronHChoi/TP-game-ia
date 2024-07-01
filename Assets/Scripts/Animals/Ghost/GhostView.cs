@@ -13,7 +13,7 @@ public class GhostView : MonoBehaviour
     {
         _model = GetComponent<Ghost>();
         _rb = GetComponent<Rigidbody>();
-        _model.onAttack += OnAttack;
+        //_model.onAttack += OnAttack;
     }
     private void Update()
     {

@@ -111,9 +111,4 @@ public class SheepPathController : MonoBehaviour
     {
         return current == currentTarget;
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(sheep.transform.position, radius);
-    }
 }
